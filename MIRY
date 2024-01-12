@@ -1,8 +1,9 @@
-_PF SRAZKY = 
-IF(SUM(data[srazky]) = 
-MAXX(
-    ADDCOLUMNS(
-    ALL(data[rok],data[mesic]),
-    "mesicni srazky",
-    CALCULATE(SUM(data[srazky]))),
-[mesicni srazky]),"LIME")
+15 nazev grafu lokalita = 
+
+SWITCH(TRUE(),
+HASONEFILTER(data[lokalita]),
+"Vývoj srážek v lokalitě "&SELECTEDVALUE(data[lokalita]),
+ISFILTERED(data[lokalita]),
+"Vývoj srážek v lokalitách " &
+CONCATENATEX(DISTINCT(data[lokalita]),data[lokalita],", ",data[lokalita],ASC),
+"Vývoj srážek napříč lokalitami")
