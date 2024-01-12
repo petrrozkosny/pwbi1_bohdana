@@ -1,0 +1,8 @@
+_PF SRAZKY = 
+IF(SUM(data[srazky]) = 
+MAXX(
+    ADDCOLUMNS(
+    ALL(data[rok],data[mesic]),
+    "mesicni srazky",
+    CALCULATE(SUM(data[srazky]))),
+[mesicni srazky]),"LIME")
