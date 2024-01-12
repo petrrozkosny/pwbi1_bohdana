@@ -1,0 +1,42 @@
+DEFINE
+MEASURE
+data[cv10 suma srazek] = 
+-- respektuji filtry vizuálu, žádné nepřidávám, tj. scénář 1, základní agregačníf funkce
+SUM(data[srazky])
+MEASURE data[cv11 suma srazek vloni] = 
+-- Scénář 4, tj. ruším  a znovu nastavuji filtry
+
+SUMX(
+	FILTER(
+		ALL(data),
+	data[rok] = MAX(data[rok]) - 1
+	&& data[mesic] = MAX(data[mesic])),
+data[srazky])
+
+MEASURE data[cv12 suma srazek kumulativne] =
+ -- Scénář 4, tj. ruším a znovu nastavuji filtry
+ 
+ SUMX(
+	FILTER(
+		ALL(data),
+	data[rok] = MAX(data[rok])
+	&& data[mesic] <= MAX(data[mesic])),
+data[srazky])
+
+MEASURE data[cv13 suma srazek kumulativne vloni] = 
+ -- Scénář 4, tj. ruším a znovu nastavuji filtry
+ 
+ SUMX(
+	FILTER(
+		ALL(data),
+	data[rok] = MAX(data[rok]) - 1
+	&& data[mesic] <= MAX(data[mesic])),
+data[srazky])
+
+MEASURE data[cv14 datum max srazek] = 
+-- Scénář 2, respektuji filtry vizuálu, přidávám další
+
+MINX(
+	FILTER(
+		data,data[srazky] = MAX(data[srazky])),
+data[datum])
